@@ -9,23 +9,6 @@ services:
     ports:
       - "8000"
     environment:
-      DATABASE_URL: postgres://postgres:postgres@db/postgres
+      DATABASE_URL: postgresql://appuser:NYHgt7HiDizBL1QJaA5WTzD76W8fqLay@dpg-d10qtere5dus73ak0j60-a.oregon-postgres.render.com/mnemoscheme4
       FLASK_APP: app:create_app()
-    depends_on:
-      - db
     restart: on-failure
-
-  db:
-    image: postgres:14-alpine
-    container_name: flask-db
-    environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: postgres
-      POSTGRES_DB: mnemoscheme4
-    volumes:
-      - pgdata:/var/lib/postgresql/data
-    ports:
-      - "5432"
-
-volumes:
-  pgdata:
