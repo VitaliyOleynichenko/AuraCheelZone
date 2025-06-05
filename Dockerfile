@@ -10,4 +10,6 @@ COPY . .
 
 EXPOSE 8000
 
-CMD ["sh", "-c", "python initdb/populate_db.py && gunicorn --bind 0.0.0.0:8000 'app:create_app()'"]
+# 1) Сначала запускаем скрипт заполнения БД (populate_db.py)
+# 2) После этого стартуем gunicorn
+CMD ["sh", "-c", "python initdb/populate_db.py && gunicorn --bind 0.0.0.0:8000 app:create_app()"]

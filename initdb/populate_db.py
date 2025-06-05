@@ -1,14 +1,29 @@
+import os
+import sys
+import logging
+
+# Добавляем родительскую директорию (корень проекта) в sys.path,
+# чтобы Python увидел пакет `app`
+current_dir = os.path.dirname(os.path.abspath(__file__))
+project_root = os.path.dirname(current_dir)
+sys.path.insert(0, project_root)
+
 from app import create_app, db
 from app.models import Menu, Employee, Table, Order, OrderItem
 
-app = create_app()
+# Настройка логирования
+logging.basicConfig(level=logging.DEBUG)
 
-with app.app_context():
-    # Очистка таблиц
+def populate_db():
+    # Создаём Flask-приложение и поднимаем контекст
+    app = create_app()
+    app.app_context().push()
+
+    # Удаляем все таблицы (если они были) и создаём заново
     db.drop_all()
     db.create_all()
 
-    # Заполнение таблицы Menu (Меню) с новым полем image_url и category
+    # === Заполнение таблицы Menu ===
     menu_data = [
         ('Рыбное Ассорти', 'Семга м/с, масляная рыба, лимон, оливка, зелень', 380, 'fish_assorty.jpg', 'Горячее'),
         ('Селедь по-русски', 'Селедь м/с, картофель отв, лук репчатый, лимон', 200, 'selede.jpg', 'Закуски'),
@@ -51,9 +66,15 @@ with app.app_context():
         ('Пиво', '0,5 л', 150, 'beer.jpg', 'Напитки')
     ]
     for name, description, price, image_url, category in menu_data:
-        db.session.add(Menu(name=name, description=description, price=price, image_url=image_url, category=category))
+        db.session.add(Menu(
+            name=name,
+            description=description,
+            price=price,
+            image_url=image_url,
+            category=category
+        ))
 
-    # Заполнение таблицы Employees (Сотрудники)
+    # === Заполнение таблицы Employee ===
     employees_data = [
         ('Ivanov', 'Ivan', 'Администратор'),
         ('Sergeev', 'Sergey', 'Директор'),
@@ -73,11 +94,12 @@ with app.app_context():
     for surname, name, position in employees_data:
         db.session.add(Employee(surname=surname, name=name, position=position))
 
-    # Заполнение таблицы Tables (Столики)
+    # === Заполнение таблицы Table (Столики) ===
     for i in range(1, 21):
         db.session.add(Table(number=i, status='Свободен'))
 
-    # Заполнение таблицы Orders (Заказы)
+    # === Заполнение таблицы Order и OrderItem ===
+    # Пример: два заказа, затем к первому заказу добавляем позиции
     orders_data = [
         ('89991234567', False, None, 1, '2023-02-14 12:00:00', 1000),
         ('89992345678', True, 'ул. Ленина, 10', None, '2023-02-14 13:00:00', 1500)
@@ -92,15 +114,25 @@ with app.app_context():
             total_amount=total_amount
         )
         db.session.add(order)
-        db.session.flush()  # Получаем order.order_id
+        db.session.flush()  # чтобы получить order.order_id сразу
 
-        # Заполнение таблицы Order_Items (Позиции заказа)
+        # Пример заполнения позиций заказа:
         order_items_data = [
-            (order.order_id, 1, 2, 500),
-            (order.order_id, 2, 3, 750)
+            (order.order_id, 1, 2, 500),  # к этому заказу: item_id=1, quantity=2, subtotal=500
+            (order.order_id, 2, 3, 750)   # к этому заказу: item_id=2, quantity=3, subtotal=750
         ]
         for order_id, item_id, quantity, subtotal in order_items_data:
-            db.session.add(OrderItem(order_id=order_id, item_id=item_id, quantity=quantity, subtotal=subtotal))
+            db.session.add(OrderItem(
+                order_id=order_id,
+                item_id=item_id,
+                quantity=quantity,
+                subtotal=subtotal
+            ))
 
+    # Сохраняем все изменения в БД
     db.session.commit()
-    print("База данных успешно заполнена!")
+    logging.info("База данных успешно заполнена!")
+
+if __name__ == '__main__':
+    populate_db()
+    print("Инициализация базы данных и заполнение данных завершены.")
