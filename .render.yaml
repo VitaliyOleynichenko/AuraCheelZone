@@ -1,0 +1,13 @@
+version: 1
+kind: service
+name: AuraCheelZone
+env: docker
+root: ./
+buildCommand: ["docker-compose", "build"]
+startCommand: ["docker-compose", "up"]
+autoDeploy: true
+envVars:
+  - key: DATABASE_URL
+    value: postgres://postgres:postgres@db/mnemoscheme4
+  - key: FLASK_APP
+    value: app:create_app()
