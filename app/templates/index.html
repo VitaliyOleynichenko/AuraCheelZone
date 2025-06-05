@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block title %}Главная - AuraCheelZone{% endblock %}
+{% block content %}
+<div class="container">
+  <!-- Герой секция -->
+  <section class="hero">
+    <div class="hero-content">
+      <h1>Добро пожаловать в AuraCheelZone</h1>
+      <p class="tagline">Откройте для себя вкус настоящей кухни!</p>
+      <div class="hero-buttons">
+        <a href="{{ url_for('routes.booking') }}" class="btn">Забронировать столик</a>
+        <a href="{{ url_for('routes.menu') }}" class="btn">Посмотреть меню</a>
+        <a href="{{ url_for('routes.promotions') }}" class="btn">Акции</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Секция "О ресторане" -->
+  <section class="about">
+    <div class="about-content">
+      <h2>О ресторане</h2>
+      <p>В AuraCheelZone мы создаем неповторимую атмосферу уюта и комфорта, предлагая гостям блюда высочайшего качества. Наш ресторан расположен по адресу: г. Новотроицк, пр. Комсомольский 7д и открыт ежедневно с 15:00 до 00:00.</p>
+      <p>Свяжитесь с нами по телефону: 8-353-761-77-96 для получения дополнительной информации.</p>
+    </div>
+  </section>
+
+</div>
+{% endblock %}

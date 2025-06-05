@@ -1,0 +1,31 @@
+version: '3.8'
+
+services:
+  web:
+    build: .
+    container_name: flask-app
+    ports:
+      - "8000:8000"
+    environment:
+      FLASK_APP: app:create_app
+      DATABASE_URL: postgres://postgres:postgres@db/postgres
+    depends_on:
+      - db
+
+  db:
+    image: postgres:14-alpine
+    container_name: flask-db
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: mnemoscheme4
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+      - ./initdb:/docker-entrypoint-initdb.d
+      - ./populate_db.py:/docker-entrypoint-initdb.d/populate_db.py
+
+volumes:
+  pgdata:

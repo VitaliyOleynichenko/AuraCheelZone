@@ -1,0 +1,75 @@
+{% extends "base.html" %}
+{% block title %}О нас - AuraCheelZone{% endblock %}
+{% block content %}
+<div class="container about-page">
+  <h1>О нас</h1>
+
+  <!-- История ресторана -->
+  <section class="history">
+    <h2>Наша история</h2>
+    <p>Ресторан <strong>"AuraCheelZone"</strong> был основан в 2010 году с целью предложить гостям высококачественную кухню и уютную атмосферу. С самого начала наша миссия заключалась в том, чтобы создавать блюда, которые не только удовлетворяют вкусовые рецепторы, но и дарят радость каждому посетителю.</p>
+    <p>За годы работы мы прошли путь от маленького семейного заведения до одного из самых популярных ресторанов города, где каждый найдет что-то по душе. Мы гордимся тем, что наши блюда готовятся только из свежих ингредиентов, а наши шеф-повара вкладывают душу в каждое приготовленное блюдо.</p>
+  </section>
+
+  <!-- Команда ресторана -->
+  <section class="team">
+    <h2>Наша команда</h2>
+    <p>За кулисами <strong>"AuraCheelZone"</strong> работает профессиональная команда, которая делает всё возможное, чтобы ваш визит был незабываемым:</p>
+    <ul>
+      <li><strong>Иванов Иван</strong> – Главный шеф-повар, мастер кухни с более чем 15-летним опытом.</li>
+      <li><strong>Сергеев Сергей</strong> – Директор ресторана, отвечающий за организацию и качество сервиса.</li>
+      <li><strong>Петров Пётр</strong> – Су-шеф, специалист по авторским рецептам.</li>
+      <li><strong>Сидоров Никита</strong> – Опытный официант, заботящийся о комфорте каждого гостя.</li>
+    </ul>
+  </section>
+
+  <!-- Контактная информация -->
+  <section class="contact-info">
+    <h2>Контакты</h2>
+    <p><strong>Адрес:</strong> г. Новотроицк, пр. Комсомольский 7д.</p>
+    <p><strong>График работы:</strong> Ресторан открыт ежедневно с 15:00 до 00:00</p>
+    <p><strong>Телефон:</strong> 8-353-761-77-96</p>
+    <p><strong>Email:</strong> info@auracheelzone.com</p>
+  </section>
+
+
+<!-- Дополнительные стили для страницы "О нас" -->
+<style>
+  .about-page {
+    padding: 2rem 0;
+  }
+  .about-page h1 {
+    text-align: center;
+    margin-bottom: 2rem;
+    animation: fadeIn 0.5s ease-out;
+  }
+  .history, .team, .contact-info, .reviews {
+    margin-bottom: 2rem;
+    padding: 1rem;
+    background-color: rgba(255, 255, 255, 0.05);
+    border-radius: 5px;
+    animation: slideIn 0.5s ease-out;
+  }
+  .history h2, .team h2, .contact-info h2, .reviews h2 {
+    border-bottom: 2px solid var(--accent-orange);
+    padding-bottom: 0.5rem;
+    margin-bottom: 1rem;
+  }
+  .team ul {
+    list-style-type: disc;
+    margin-left: 2rem;
+  }
+  .contact-info p, .reviews p {
+    margin-bottom: 0.5rem;
+  }
+  /* Анимации */
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+  @keyframes slideIn {
+    from { transform: translateY(20px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+  }
+</style>
+{% endblock %}

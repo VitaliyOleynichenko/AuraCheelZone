@@ -1,0 +1,571 @@
+:root {
+  --bg-dark: #1A1A1A;
+  --accent-orange: #FF6B35;
+  --accent-orange-light: #FF8C42;
+  --text-white: #FFFFFF;
+  --text-gray: #CCCCCC;
+  --success-green: #4CAF50;
+  --transition-duration: 0.3s;
+  --animation-duration: 0.5s;
+}
+
+/* Общие стили */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: var(--bg-dark);
+  color: var(--text-white);
+  font-family: 'Open Sans', sans-serif;
+  line-height: 1.6;
+  animation: bodyFadeIn 1s ease-out;
+}
+
+@keyframes bodyFadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+h1, h2, h3 {
+  font-family: 'Montserrat', sans-serif;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* Навигация */
+header {
+  background-color: var(--accent-orange);
+  padding: 20px;
+  text-align: center;
+  animation: slideDown var(--animation-duration) ease-out;
+}
+
+header img {
+  max-width: 150px;
+  margin-top: 10px;
+  transition: transform var(--transition-duration);
+}
+
+header img:hover {
+  transform: scale(1.05);
+}
+
+nav {
+  background-color: var(--accent-orange-light);
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  padding: 15px 0;
+  animation: fadeIn var(--animation-duration) ease-out;
+}
+
+nav a {
+  color: var(--text-white);
+  text-decoration: none;
+  font-weight: bold;
+  transition: color var(--transition-duration), transform var(--transition-duration);
+}
+
+nav a:hover {
+  color: var(--accent-orange);
+  transform: scale(1.1);
+}
+
+/* Герой секция */
+.hero {
+  padding: 8rem 0 4rem;
+  text-align: center;
+  background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)),
+              url('../images/hero-bg.jpg') no-repeat center center/cover;
+  animation: heroZoomIn 1s ease-out;
+}
+
+@keyframes heroZoomIn {
+  from { transform: scale(0.95); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+.hero h1 {
+  font-size: 3rem;
+  margin-bottom: 1.5rem;
+  animation: fadeIn var(--animation-duration) ease-out;
+}
+
+.hero .tagline {
+  font-size: 1.2rem;
+  margin-bottom: 2rem;
+  opacity: 0.8;
+}
+
+.hero .btn {
+  display: inline-block;
+  padding: 1rem 2rem;
+  background-color: var(--accent-orange);
+  color: var(--text-white);
+  text-decoration: none;
+  border-radius: 5px;
+  transition: background-color var(--transition-duration), transform var(--transition-duration);
+  margin: 0 0.5rem;
+}
+
+.hero .btn:hover {
+  background-color: var(--accent-orange-light);
+  transform: translateY(-3px);
+}
+
+/* Секция "О ресторане" */
+.about {
+  padding: 4rem 0;
+  text-align: center;
+  background-color: rgba(255, 107, 53, 0.1);
+  animation: fadeIn var(--animation-duration) ease-out;
+}
+
+.about h2 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  position: relative;
+}
+
+.about p {
+  max-width: 800px;
+  margin: 0.5rem auto;
+  font-size: 1rem;
+  color: var(--text-gray);
+}
+
+/* Секция "Хиты кухни" */
+.featured-menu {
+  padding: 4rem 0;
+  animation: fadeIn var(--animation-duration) ease-out;
+}
+
+.featured-menu h2 {
+  text-align: center;
+  font-size: 2.5rem;
+  margin-bottom: 1.5rem;
+  position: relative;
+}
+
+.featured-menu h2::after {
+  content: '';
+  position: absolute;
+  width: 50%;
+  height: 3px;
+  background-color: var(--accent-orange);
+  bottom: -10px;
+  left: 25%;
+  animation: lineExpand var(--animation-duration) ease-out;
+}
+
+@keyframes lineExpand {
+  from { width: 0; }
+  to { width: 50%; }
+}
+
+.menu-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+}
+
+/* Карточки товаров */
+.menu-item {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  height: 420px;
+  transform: translateY(20px);
+  opacity: 0;
+  animation: cardAppear var(--animation-duration) ease-out forwards;
+}
+
+@keyframes cardAppear {
+  to { transform: translateY(0); opacity: 1; }
+}
+
+.menu-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
+
+.card-content {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.card-image {
+  flex-shrink: 0;
+  width: 100%;
+  height: 200px;
+  overflow: hidden;
+  position: relative;
+}
+
+.card-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform var(--transition-duration);
+}
+
+.card-image img:hover {
+  transform: scale(1.1);
+}
+
+.no-image {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  background-color: #333;
+  color: var(--text-gray);
+  font-size: 0.9rem;
+}
+
+.card-info {
+  flex-grow: 1;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: background-color var(--transition-duration);
+}
+
+.card-info:hover {
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+.card-info h3 {
+  font-size: 1.4rem;
+  margin-bottom: 0.5rem;
+  transition: color var(--transition-duration);
+}
+
+.card-info h3:hover {
+  color: var(--accent-orange-light);
+}
+
+.card-info .description {
+  font-size: 0.9rem;
+  margin-bottom: 0.8rem;
+  color: var(--text-gray);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+}
+
+.card-info .price {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: var(--accent-orange);
+  margin-bottom: 1rem;
+  transition: transform var(--transition-duration);
+}
+
+.card-info .price:hover {
+  transform: scale(1.1);
+}
+
+.quantity-control {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.quantity-input {
+  width: 60px;
+  padding: 8px;
+  border: 1px solid var(--accent-orange);
+  border-radius: 5px;
+  background-color: var(--bg-dark);
+  color: var(--text-white);
+  text-align: center;
+  transition: border var(--transition-duration);
+}
+
+.quantity-input:focus {
+  border-color: var(--accent-orange-light);
+}
+
+.add-to-cart {
+  background-color: var(--accent-orange);
+  color: var(--text-white);
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color var(--transition-duration), transform var(--transition-duration);
+  font-size: 1rem;
+}
+
+.add-to-cart:hover {
+  background-color: var(--accent-orange-light);
+  transform: scale(1.05);
+}
+
+/* Секция "Отзывы" */
+.reviews {
+  padding: 4rem 0;
+  background-color: rgba(255, 255, 255, 0.05);
+  animation: fadeIn var(--animation-duration) ease-out;
+}
+
+.reviews h2 {
+  text-align: center;
+  font-size: 2.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.review-cards {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 2rem;
+}
+
+.review-card {
+  background-color: rgba(255, 255, 255, 0.1);
+  padding: 1.5rem;
+  border-radius: 8px;
+  max-width: 350px;
+  text-align: center;
+  transition: transform var(--transition-duration), box-shadow var(--transition-duration);
+  animation: fadeIn var(--animation-duration) ease-out;
+}
+
+.review-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
+
+.review-text {
+  font-size: 1rem;
+  margin-bottom: 0.5rem;
+  color: var(--text-gray);
+}
+
+.review-author {
+  font-size: 0.9rem;
+  color: var(--accent-orange-light);
+}
+
+/* Модальное окно успешного оформления заказа */
+.order-success-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  animation: fadeIn var(--animation-duration) ease-out;
+}
+
+.order-success-modal .modal-content {
+  background-color: var(--bg-dark);
+  border: 2px solid var(--accent-orange);
+  padding: 20px;
+  border-radius: 8px;
+  color: var(--accent-orange);
+  max-width: 400px;
+  text-align: center;
+  animation: slideIn var(--animation-duration) ease-out;
+}
+
+.order-success-modal .modal-content h2 {
+  margin-top: 0;
+  color: var(--accent-orange);
+}
+
+.order-success-modal .modal-close-btn {
+  background-color: var(--accent-orange);
+  color: var(--bg-dark);
+  border: none;
+  padding: 10px 20px;
+  margin-top: 20px;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background-color var(--transition-duration);
+}
+
+.order-success-modal .modal-close-btn:hover {
+  background-color: var(--accent-orange-light);
+}
+
+/* Стили для toast-уведомлений */
+.toast-notification {
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: var(--accent-orange);
+  color: var(--bg-dark);
+  padding: 10px 20px;
+  border-radius: 5px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+  z-index: 10000;
+  opacity: 1;
+  transition: opacity 0.5s;
+}
+
+.toast-notification.fade-out {
+  opacity: 0;
+}
+
+/* Стили для карты ресторана */
+.restaurant-map {
+  position: relative;
+  width: 1120px;
+  height: 600px;
+  margin: 0 auto 20px;
+  background-color: #eaeaea;
+  animation: mapLoad var(--animation-duration) ease-out;
+}
+
+@keyframes mapLoad {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+/* Таблицы ресторана */
+.table {
+  position: absolute;
+  background-color: #4CAF50;
+  color: white;
+  text-align: center;
+  cursor: pointer;
+  font-size: 1rem;
+  line-height: 50px;
+  border: 1px solid transparent;
+  transition: transform var(--transition-duration), border var(--transition-duration);
+}
+
+.table:hover {
+  transform: scale(1.1);
+}
+
+.available {
+  background-color: #4CAF50;
+}
+
+.booked {
+  background-color: #f44336;
+  cursor: default;
+}
+
+/* Позиционирование столов (точно по заданным координатам) */
+#table-1 { top: 13px; left: 50px; width: 80px; height: 160px; }
+#table-2 { top: 13px; left: 180px; width: 80px; height: 160px; }
+#table-3 { top: 13px; left: 310px; width: 80px; height: 160px; }
+#table-4 { top: 13px; left: 440px; width: 80px; height: 160px; }
+#table-5 { top: 13px; left: 570px; width: 80px; height: 160px; }
+#table-6 { top: 13px; left: 700px; width: 80px; height: 160px; }
+#table-7 { top: 13px; left: 830px; width: 80px; height: 160px; }
+#table-8 { top: 13px; left: 960px; width: 80px; height: 160px; }
+#table-9 { top: 180px; left: 50px; width: 160px; height: 80px; }
+#table-10 { top: 180px; left: 300px; width: 160px; height: 80px; }
+#table-11 { top: 180px; left: 550px; width: 160px; height: 80px; }
+#table-12 { top: 180px; left: 800px; width: 160px; height: 80px; }
+#table-13 { top: 267px; left: 50px; width: 160px; height: 80px; }
+#table-14 { top: 267px; left: 300px; width: 160px; height: 80px; }
+#table-15 { top: 267px; left: 550px; width: 160px; height: 80px; }
+#table-16 { top: 267px; left: 800px; width: 160px; height: 80px; }
+#table-17 { top: 353px; left: 50px; width: 80px; height: 160px; }
+#table-18 { top: 353px; left: 180px; width: 80px; height: 160px; }
+#table-19 { top: 353px; left: 310px; width: 80px; height: 160px; }
+#table-20 { top: 353px; left: 440px; width: 80px; height: 160px; }
+#table-21 { top: 353px; left: 570px; width: 80px; height: 160px; }
+#table-22 { top: 353px; left: 700px; width: 80px; height: 160px; }
+#table-23 { top: 353px; left: 830px; width: 80px; height: 160px; }
+#table-24 { top: 353px; left: 960px; width: 80px; height: 160px; }
+
+/* Бар ресторана */
+.bar {
+  position: absolute;
+  top: 50%;
+  left: 95%;
+  transform: translate(-50%, -50%);
+  width: 80px;
+  height: 80px;
+  background-color: #555;
+  color: white;
+  line-height: 80px;
+  text-align: center;
+  border-radius: 50%;
+  animation: barPulse 2s infinite;
+}
+
+@keyframes barPulse {
+  0% { transform: translate(-50%, -50%) scale(1); }
+  50% { transform: translate(-50%, -50%) scale(1.1); }
+  100% { transform: translate(-50%, -50%) scale(1); }
+}
+
+/* Дополнительные анимации */
+.animate-bounce {
+  animation: bounce 0.5s ease;
+}
+
+@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+  40% { transform: translateY(-10px); }
+  60% { transform: translateY(-5px); }
+}
+
+.animate-flip {
+  animation: flip 0.6s ease;
+}
+
+@keyframes flip {
+  from { transform: perspective(400px) rotateY(90deg); opacity: 0; }
+  to { transform: perspective(400px) rotateY(0deg); opacity: 1; }
+}
+/* Стили для модального окна успеха бронирования */
+.booking-success-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 11000;
+  animation: modalFadeIn 0.5s ease-out;
+}
+
+.booking-success-modal .modal-content {
+  background-color: var(--bg-dark);
+  padding: 20px;
+  border-radius: 8px;
+  text-align: center;
+  border: 2px solid var(--accent-orange);
+}
+
+.booking-success-modal h2 {
+  color: var(--accent-orange);
+  margin-bottom: 10px;
+}
+
+.booking-success-modal.fade-out {
+  opacity: 0;
+  transition: opacity 0.5s;
+}

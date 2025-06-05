@@ -1,0 +1,106 @@
+{% extends "base.html" %}
+{% block title %}Корзина - AuraCheelZone{% endblock %}
+{% block content %}
+<div class="container">
+  <section class="order-page">
+    <h1>Корзина</h1>
+    <!-- Форма оформления заказа -->
+    <form id="order-form">
+      <div class="cart-items">
+        <h2>Ваша корзина</h2>
+        <!-- Контейнер, который заполнится данными из localStorage -->
+        <div id="cart-list"></div>
+        <p id="cart-total"></p>
+      </div>
+      <div class="order-details">
+        <label for="phone">Номер телефона:</label>
+        <input type="text" name="phone" id="phone" required>
+      </div>
+      <div class="delivery-options">
+        <h2>Способ получения</h2>
+        <label>
+          <input type="radio" name="delivery_option" value="pickup" checked>
+          Самовывоз
+        </label>
+        <label>
+          <input type="radio" name="delivery_option" value="delivery" id="delivery-checkbox">
+          Доставка
+        </label>
+        <div id="delivery-address" style="display:none;">
+          <label for="address">Адрес доставки:</label>
+          <input type="text" name="address" id="address">
+        </div>
+      </div>
+      <button type="submit">Оформить заказ</button>
+    </form>
+  </section>
+</div>
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+  const deliveryOptions = document.querySelectorAll('input[name="delivery_option"]');
+  const deliveryAddress = document.getElementById('delivery-address');
+  const addressInput = document.getElementById('address');
+
+  deliveryOptions.forEach(option => {
+    option.addEventListener('change', function() {
+      if (this.value === 'delivery') {
+        deliveryAddress.style.display = 'block';
+        addressInput.setAttribute('required', 'required');
+      } else {
+        deliveryAddress.style.display = 'none';
+        addressInput.removeAttribute('required');
+      }
+    });
+  });
+});
+</script>
+
+<style>
+  /* Базовые стили для страницы оформления заказа */
+  .order-page {
+    margin-top: 20px;
+  }
+  .cart-items {
+    border: 1px solid #FF6B35;
+    padding: 15px;
+    border-radius: 5px;
+    background-color: #2E2E2E;
+  }
+  .order-details, .delivery-options {
+    margin-top: 20px;
+    padding: 10px;
+    background-color: #2E2E2E;
+    border-radius: 5px;
+  }
+  .order-details label, .delivery-options label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+  }
+  .order-details input, .delivery-options input[type="text"] {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #FF6B35;
+    border-radius: 4px;
+    background-color: #1A1A1A;
+    color: #fff;
+  }
+  .delivery-options label {
+    display: inline-block;
+    margin-right: 15px;
+  }
+  #delivery-address {
+    margin-top: 10px;
+  }
+  button[type="submit"] {
+    background-color: #FF6B35;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 20px;
+  }
+</style>
+{% endblock %}

@@ -1,0 +1,156 @@
+{% extends "base.html" %}
+{% block title %}Акции - AuraCheelZone{% endblock %}
+{% block content %}
+<div class="container promotions-page">
+  <h1>Акции и Специальные Предложения</h1>
+  <p>Следите за нашими акциями, чтобы первыми узнавать о скидках, бонусах и эксклюзивных предложениях для наших гостей!</p>
+
+  <div class="promotions-grid">
+    <div class="promotion-card animate-flip">
+      <div class="promotion-image">
+        <span class="emoji">🔥</span>
+      </div>
+      <h2>Скидка 20% на блюда дня</h2>
+      <p>Каждый день мы предлагаем 20% скидку на избранные блюда. Попробуйте что-то новое и сэкономьте!</p>
+
+    </div>
+    <div class="promotion-card animate-flip">
+      <div class="promotion-image">
+        <span class="emoji">🍹</span>
+      </div>
+      <h2>Счастливые часы</h2>
+      <p>С 16:00 до 18:00 – до 50% скидки на напитки и десерты! Наслаждайтесь приятными моментами вместе с нами.</p>
+
+    </div>
+    <div class="promotion-card animate-flip">
+      <div class="promotion-image">
+        <span class="emoji">🎉</span>
+      </div>
+      <h2>Праздничный обеденный сет</h2>
+      <p>Закажите наш праздничный сет и получите бесплатный десерт в подарок. Только сегодня!</p>
+
+    </div>
+  </div>
+
+  <div class="promotion-announcement">
+    <h2>Подписывайтесь на нас</h2>
+    <p>Будьте в курсе всех новинок и специальных предложений – подписывайтесь на наши социальные сети!</p>
+  </div>
+</div>
+{% endblock %}
+
+{% block style %}
+<style>
+/* Стили для страницы акций */
+.promotions-page {
+  text-align: center;
+  padding: 2rem 0;
+  animation: fadeIn 1s ease-out;
+}
+
+.promotions-page h1 {
+  font-size: 2.8rem;
+  margin-bottom: 1rem;
+  animation: slideIn 0.8s ease-out;
+}
+
+.promotions-page p {
+  font-size: 1.1rem;
+  margin-bottom: 2rem;
+  color: var(--text-gray);
+  animation: fadeIn 0.8s ease-out;
+}
+
+.promotions-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+.promotion-card {
+  background-color: rgba(255, 255, 255, 0.1);
+  padding: 1.5rem;
+  border-radius: 8px;
+  transition: transform 0.3s, box-shadow 0.3s;
+  cursor: pointer;
+  animation: cardAppear 0.6s ease-out forwards;
+}
+
+.promotion-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0,0,0,0.3);
+}
+
+.promotion-image {
+  width: 100%;
+  height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #333;
+  border-radius: 5px;
+  margin-bottom: 1rem;
+  transition: transform 0.3s;
+}
+
+.promotion-image .emoji {
+  font-size: 80px;
+  transition: transform 0.3s;
+}
+
+.promotion-image:hover .emoji {
+  transform: scale(1.1);
+}
+
+.btn-promotion {
+  background-color: var(--accent-orange);
+  color: var(--text-white);
+  padding: 0.75rem 1.5rem;
+  border-radius: 4px;
+  text-decoration: none;
+  transition: background-color 0.3s, transform 0.3s;
+  display: inline-block;
+  margin-top: 1rem;
+}
+
+.btn-promotion:hover {
+  background-color: var(--accent-orange-light);
+  transform: scale(1.05);
+}
+
+.promotion-announcement {
+  margin-top: 3rem;
+  padding: 1rem;
+  background-color: rgba(255, 255, 255, 0.05);
+  border-radius: 8px;
+  animation: slideIn 0.8s ease-out;
+}
+
+/* Анимации */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideIn {
+  from { transform: translateY(-20px); }
+  to { transform: translateY(0); }
+}
+
+@keyframes cardAppear {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Дополнительные эффекты */
+.animate-flip {
+  animation: flip 0.6s ease;
+}
+
+@keyframes flip {
+  from { transform: perspective(400px) rotateY(90deg); opacity: 0; }
+  to { transform: perspective(400px) rotateY(0deg); opacity: 1; }
+}
+</style>
+{% endblock %}

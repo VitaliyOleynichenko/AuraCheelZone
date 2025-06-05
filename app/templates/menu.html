@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+{% block title %}Меню - AuraCheelZone{% endblock %}
+{% block content %}
+<div class="container">
+  <section class="menu-page">
+    <h1>Наше меню</h1>
+    <div class="search-box">
+      <input type="text" id="menuSearch" placeholder="Поиск блюда...">
+    </div>
+    {% if categories %}
+      {% for category in categories %}
+        <div class="menu-category">
+          <h2>{{ category.name }}</h2>
+          <div class="menu-grid">
+            {% for dish in category.dishes %}
+              <div class="menu-item" data-name="{{ dish.name|lower }}">
+                <div class="card-content">
+                  <div class="card-image">
+                    {% if dish.image_url %}
+                      <img src="{{ url_for('static', filename='images/' ~ dish.image_url) }}" alt="{{ dish.name }}">
+                    {% else %}
+                      <div class="no-image">Нет изображения</div>
+                    {% endif %}
+                  </div>
+                  <div class="card-info">
+                    <h3>{{ dish.name }}</h3>
+                    <p class="description">{{ dish.description }}</p>
+                    <p class="price">{{ dish.price }} ₽</p>
+                    <div class="quantity-control">
+                      <input type="number" class="quantity-input" value="1" min="1" data-id="{{ dish.item_id }}">
+                      <button class="add-to-cart" data-id="{{ dish.item_id }}">В корзину</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            {% endfor %}
+          </div>
+        </div>
+      {% endfor %}
+    {% else %}
+      <p>Меню пусто.</p>
+    {% endif %}
+  </section>
+</div>
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+  const searchInput = document.getElementById('menuSearch');
+  const menuItems = document.querySelectorAll('.menu-item');
+  searchInput.addEventListener('input', function() {
+    const searchTerm = this.value.toLowerCase();
+    menuItems.forEach(item => {
+      const itemName = item.getAttribute('data-name');
+      item.style.display = itemName.includes(searchTerm) ? 'block' : 'none';
+    });
+  });
+});
+</script>
+{% endblock %}
