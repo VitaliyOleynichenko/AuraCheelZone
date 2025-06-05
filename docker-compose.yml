@@ -24,7 +24,6 @@ services:
       POSTGRES_DB: mnemoscheme4
     volumes:
       - pgdata:/var/lib/postgresql/data
-      - ./initdb:/docker-entrypoint-initdb.d
     ports:
       - "5432"
 
